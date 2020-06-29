@@ -13,7 +13,7 @@ module.exports = class BetterEmojiTooltips extends Plugin {
             label: 'Better Emoji Tooltips',
             render: Settings
         });
-        this.loadStylesheet(resolve(__dirname, 'style.css'))
+        this.loadStylesheet(resolve(__dirname, 'style.css')) 
 
         const { getCustomEmojiById } = await getModule(['getCustomEmojiById'])
         const { getGuild } = await getModule(['getGuild'])
