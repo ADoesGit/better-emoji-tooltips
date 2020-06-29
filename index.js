@@ -7,8 +7,13 @@ const Settings = require('./Settings')
 
 module.exports = class BetterEmojiTooltips extends Plugin {
     async startPlugin() {
-        this.registerSettings('better-emoji-tooltips', 'Better Emoji Tooltips', Settings)
-        this.loadCSS(resolve(__dirname, 'style.css'))
+        //this.registerSettings('better-emoji-tooltips', 'Better Emoji Tooltips', Settings)
+        powercord.api.settings.registerSettings('better-emoji-tooltips', {
+            category: 'Better Emoji Tooltips',
+            label: 'Better Emoji Tooltips',
+            render: Settings
+        });
+        this.loadStylesheet(resolve(__dirname, 'style.css'))
 
         const { getCustomEmojiById } = await getModule(['getCustomEmojiById'])
         const { getGuild } = await getModule(['getGuild'])
@@ -50,6 +55,7 @@ module.exports = class BetterEmojiTooltips extends Plugin {
     }
 
     pluginWillUnload() {
+        powercord.api.settings.unregisterSettings('better-emoji-tooltips') 
         uninject('better-emoji-tooltips')
     }
 }
